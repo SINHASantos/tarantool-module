@@ -352,6 +352,25 @@ impl Default for IndexType {
 #[deprecated = "use index::FieldType instead"]
 pub type IndexFieldType = FieldType;
 
+#[cfg(feature = "picodata")]
+crate::define_str_enum! {
+    #![coerce_from_str]
+    /// Type of index part.
+    pub enum FieldType {
+        Unsigned  = "unsigned",
+        String    = "string",
+        Double    = "double",
+        Integer   = "integer",
+        Boolean   = "boolean",
+        Varbinary = "varbinary",
+        Decimal   = "decimal",
+        Uuid      = "uuid",
+        Datetime  = "datetime",
+        Array     = "array",
+    }
+}
+
+#[cfg(not(feature = "picodata"))]
 crate::define_str_enum! {
     #![coerce_from_str]
     /// Type of index part.

@@ -5,6 +5,8 @@
 ### Added
 - `network::client::tcp::TcpStream` not supports async connection, provided with `connect_async` and `connect_timeout_async` methods
 
+### Breaking (picodata)
+- SCALAR and NUMBER field types are now removed and replaced with INTEGER.
 
 
 # [6.0.0] Nov 20 2024

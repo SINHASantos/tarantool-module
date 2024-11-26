@@ -826,6 +826,25 @@ impl TupleIterator {}
 // FieldType
 ////////////////////////////////////////////////////////////////////////////////
 
+#[cfg(feature = "picodata")]
+crate::define_str_enum! {
+    pub enum FieldType {
+        Any       = "any",
+        Unsigned  = "unsigned",
+        String    = "string",
+        Double    = "double",
+        Integer   = "integer",
+        Boolean   = "boolean",
+        Varbinary = "varbinary",
+        Decimal   = "decimal",
+        Uuid      = "uuid",
+        Datetime  = "datetime",
+        Array     = "array",
+        Map       = "map",
+    }
+}
+
+#[cfg(not(feature = "picodata"))]
 crate::define_str_enum! {
     pub enum FieldType {
         Any       = "any",
@@ -852,6 +871,28 @@ impl Default for FieldType {
     }
 }
 
+#[cfg(feature = "picodata")]
+impl From<index::FieldType> for FieldType {
+    #[rustfmt::skip]
+    fn from(t: index::FieldType) -> Self {
+        match t {
+            // "any" type is not supported as index part,
+            // that's the only reason we need 2 enums.
+            index::FieldType::Unsigned  => Self::Unsigned,
+            index::FieldType::String    => Self::String,
+            index::FieldType::Double    => Self::Double,
+            index::FieldType::Integer   => Self::Integer,
+            index::FieldType::Boolean   => Self::Boolean,
+            index::FieldType::Varbinary => Self::Varbinary,
+            index::FieldType::Decimal   => Self::Decimal,
+            index::FieldType::Uuid      => Self::Uuid,
+            index::FieldType::Datetime  => Self::Datetime,
+            index::FieldType::Array     => Self::Array,
+        }
+    }
+}
+
+#[cfg(not(feature = "picodata"))]
 impl From<index::FieldType> for FieldType {
     #[rustfmt::skip]
     fn from(t: index::FieldType) -> Self {

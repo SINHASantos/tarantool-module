@@ -315,6 +315,24 @@ impl Field {
         self
     }
 
+    #[cfg(feature = "picodata")]
+    define_constructors! {
+        any(FieldType::Any)
+        unsigned(FieldType::Unsigned)
+        string(FieldType::String)
+        double(FieldType::Double)
+        integer(FieldType::Integer)
+        boolean(FieldType::Boolean)
+        varbinary(FieldType::Varbinary)
+        decimal(FieldType::Decimal)
+        uuid(FieldType::Uuid)
+        datetime(FieldType::Datetime)
+        interval(FieldType::Interval)
+        array(FieldType::Array)
+        map(FieldType::Map)
+    }
+
+    #[cfg(not(feature = "picodata"))]
     define_constructors! {
         any(FieldType::Any)
         unsigned(FieldType::Unsigned)
@@ -341,6 +359,28 @@ impl Field {
 #[deprecated = "use space::FieldType instead"]
 pub type SpaceFieldType = FieldType;
 
+#[cfg(feature = "picodata")]
+crate::define_str_enum! {
+    #![coerce_from_str]
+    /// Type of a field in the space format definition.
+    pub enum FieldType {
+        Any       = "any",
+        Unsigned  = "unsigned",
+        String    = "string",
+        Double    = "double",
+        Integer   = "integer",
+        Boolean   = "boolean",
+        Varbinary = "varbinary",
+        Decimal   = "decimal",
+        Uuid      = "uuid",
+        Datetime  = "datetime",
+        Interval  = "interval",
+        Array     = "array",
+        Map       = "map",
+    }
+}
+
+#[cfg(not(feature = "picodata"))]
 crate::define_str_enum! {
     #![coerce_from_str]
     /// Type of a field in the space format definition.

@@ -40,11 +40,14 @@ pub fn space_field_type() {
     assert_eq!(from_str::<T>(" STRING ").unwrap(), T::String);
     assert_eq!(from_str::<T>("str").ok(), None);
 
-    assert_eq!(to_string(&T::Number).unwrap(), "number");
-    assert_eq!(from_str::<T>("number").unwrap(), T::Number);
-    assert_eq!(from_str::<T>(" Number  ").unwrap(), T::Number);
-    assert_eq!(from_str::<T>(" NUMBER ").unwrap(), T::Number);
-    assert_eq!(from_str::<T>("num").ok(), None);
+    #[cfg(not(feature = "picodata"))]
+    {
+        assert_eq!(to_string(&T::Number).unwrap(), "number");
+        assert_eq!(from_str::<T>("number").unwrap(), T::Number);
+        assert_eq!(from_str::<T>(" Number  ").unwrap(), T::Number);
+        assert_eq!(from_str::<T>(" NUMBER ").unwrap(), T::Number);
+        assert_eq!(from_str::<T>("num").ok(), None);
+    }
 
     assert_eq!(to_string(&T::Double).unwrap(), "double");
     assert_eq!(from_str::<T>("double").unwrap(), T::Double);
@@ -94,11 +97,14 @@ pub fn space_field_type() {
     assert_eq!(from_str::<T>(" ARRAY ").unwrap(), T::Array);
     assert_eq!(from_str::<T>("arr").ok(), None);
 
-    assert_eq!(to_string(&T::Scalar).unwrap(), "scalar");
-    assert_eq!(from_str::<T>("scalar").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>("Scalar  ").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>(" SCALAR ").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>("scal").ok(), None);
+    #[cfg(not(feature = "picodata"))]
+    {
+        assert_eq!(to_string(&T::Scalar).unwrap(), "scalar");
+        assert_eq!(from_str::<T>("scalar").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>("Scalar  ").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>(" SCALAR ").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>("scal").ok(), None);
+    }
 
     assert_eq!(to_string(&T::Map).unwrap(), "map");
     assert_eq!(from_str::<T>("map").unwrap(), T::Map);
@@ -152,11 +158,14 @@ pub fn index_field_type() {
     assert_eq!(from_str::<T>(" INTEGER ").unwrap(), T::Integer);
     assert_eq!(from_str::<T>("int").ok(), None);
 
-    assert_eq!(to_string(&T::Number).unwrap(), "number");
-    assert_eq!(from_str::<T>("number").unwrap(), T::Number);
-    assert_eq!(from_str::<T>(" Number  ").unwrap(), T::Number);
-    assert_eq!(from_str::<T>(" NUMBER ").unwrap(), T::Number);
-    assert_eq!(from_str::<T>("num").ok(), None);
+    #[cfg(not(feature = "picodata"))]
+    {
+        assert_eq!(to_string(&T::Number).unwrap(), "number");
+        assert_eq!(from_str::<T>("number").unwrap(), T::Number);
+        assert_eq!(from_str::<T>(" Number  ").unwrap(), T::Number);
+        assert_eq!(from_str::<T>(" NUMBER ").unwrap(), T::Number);
+        assert_eq!(from_str::<T>("num").ok(), None);
+    }
 
     assert_eq!(to_string(&T::Double).unwrap(), "double");
     assert_eq!(from_str::<T>("double").unwrap(), T::Double);
@@ -194,11 +203,14 @@ pub fn index_field_type() {
     assert_eq!(from_str::<T>(" ARRAY ").unwrap(), T::Array);
     assert_eq!(from_str::<T>("arr").ok(), None);
 
-    assert_eq!(to_string(&T::Scalar).unwrap(), "scalar");
-    assert_eq!(from_str::<T>("scalar").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>("Scalar  ").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>(" SCALAR ").unwrap(), T::Scalar);
-    assert_eq!(from_str::<T>("scal").ok(), None);
+    #[cfg(not(feature = "picodata"))]
+    {
+        assert_eq!(to_string(&T::Scalar).unwrap(), "scalar");
+        assert_eq!(from_str::<T>("scalar").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>("Scalar  ").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>(" SCALAR ").unwrap(), T::Scalar);
+        assert_eq!(from_str::<T>("scal").ok(), None);
+    }
 }
 
 pub fn rtree_index_distance_type() {

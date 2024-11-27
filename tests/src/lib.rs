@@ -491,18 +491,9 @@ fn run_tests(cfg: TestConfig) -> Result<bool, io::Error> {
                 net_box::async_common_cond,
                 net_box::connection_error,
                 net_box::is_connected,
-                net_box::schema_sync,
-                net_box::select,
-                net_box::get,
-                net_box::insert,
-                net_box::replace,
-                net_box::update,
-                net_box::upsert,
-                net_box::delete,
                 net_box::cancel_recv,
                 net_box::triggers_connect,
                 net_box::triggers_reject,
-                net_box::triggers_schema_sync,
                 net_box::execute,
                 proc::simple,
                 proc::return_tuple,
@@ -532,6 +523,21 @@ fn run_tests(cfg: TestConfig) -> Result<bool, io::Error> {
                 datetime::to_lua,
                 datetime::from_lua,
             ]);
+
+            #[cfg(not(feature = "picodata"))]
+            {
+                tests.append(&mut tests![
+                    net_box::schema_sync,
+                    net_box::get,
+                    net_box::select,
+                    net_box::insert,
+                    net_box::replace,
+                    net_box::update,
+                    net_box::upsert,
+                    net_box::delete,
+                    net_box::triggers_schema_sync,
+                ])
+            }
 
             #[cfg(feature = "picodata")]
             {

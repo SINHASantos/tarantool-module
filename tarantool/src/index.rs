@@ -1185,6 +1185,7 @@ mod tests {
         space.drop().unwrap();
     }
 
+    #[cfg(not(feature = "picodata"))]
     #[crate::test(tarantool = "crate")]
     fn sys_index_metadata() {
         let sys_index = Space::from(SystemSpace::Index);
